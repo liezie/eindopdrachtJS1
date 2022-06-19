@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>07-scrabble-punten-berekenaar.html</title>
+	<script type="text/javascript">
+		const alfabetScore = [1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10];
+		let controle = ingave => ingave != null && ingave.length > 0;
+		
+		function buildAlfabet() {
+			let letters = [];
+			let start = 97;
+			for (var i = 0; i < 26; i++) {
+				letters.push(String.fromCharCode(start + i).toUpperCase());
+			}
+			return letters;
+		}
+
+		function bereken(){
+			let alfabet = buildAlfabet();
+			let woord = document.getElementById("woord").value;
+		
+			if(!controle(woord)) {
+				document.getElementById("resultaat").innerHTML = "<h2>Fout!</h2><p>Er is een probleem met de ingave.</p>";
+				return;
+			}
+
+			let totaal = 0;
+			let html = `<h2>Resultaat</h2><p>Het woord is ${woord}.</p>`;
+
+			for (var i = 0; i < woord.length; i++) {
+				let letter = woord[i];
+				let positie = alfabet.indexOf(letter.toUpperCase());
+				if(!(positie>=0)) {
+					document.getElementById("resultaat").innerHTML = "<h2>Fout!</h2><p>Er is een probleem met de ingave.</p>";
+					return;
+				}
+
+				html += '<p>' + `${letter} - ${alfabetScore[positie]}` + '</p>'
+				totaal += alfabetScore[positie];
+			}
+
+			html += '<p>' + `Totaal: ${totaal} punten.` + '</p>'
+			document.getElementById("resultaat").innerHTML = html;
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Scrabble punten berekenaar</h1>
+	<p><input type="text" id="woord" placeholder="Voor welk woord wil je de score berekenen?" size="100"></p>
+	<p><button onclick="bereken()">Bereken!</button></p>
+	<hr>
+	<div id="resultaat" />
+</body>
+</html>

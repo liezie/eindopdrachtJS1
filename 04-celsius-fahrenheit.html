@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>04-celsius-fahrenheit.html</title>
+	<script type="text/javascript">
+		let schrijfResultaat = waarde => {
+			document.getElementById("result").value = waarde.toString();
+		}
+		let controle = ingave => ingave != null && ingave.length > 0 && !isNaN(ingave);
+		let convertC2F = input => ((Number(input)*9)/5) + 32;
+		let convertF2C = input => (((Number(input) - 32) *5)/9);
+
+
+		function run(id) {
+			let temp = prompt("Hoeveel graden wil je omzetten?");
+
+			if(!controle(temp)) {
+				schrijfResultaat('Dit is geen geldige waarde!');
+				return;
+			}
+
+			if(id == "C2F") 
+				schrijfResultaat(temp + "°C is " + convertC2F(temp) + "°F");
+			else 
+				schrijfResultaat(temp + "°F is " + convertF2C(temp) + "°C");
+
+		}
+	</script>
+</head>
+<body>
+<button id="C2F" onclick="run(this.id)">Celcius naar Fahrenheit</button>
+<button id="F2C" onclick="run(this.id)">Fahrenheit naar Celcius</button>
+<hr>
+<input type="text" name="result" id="result" placeholder="resultaat">
+
+</body>
+</html>

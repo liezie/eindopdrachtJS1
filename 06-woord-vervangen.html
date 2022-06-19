@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>06-woord-vervangen.html</title>
+	<script type="text/javascript">
+		function validated(input) {
+			let string = document.getElementById(input).value;
+
+			if(!string.length > 0){
+				alert(`Je hebt nog geen ${input} ingevuld!`);
+				return false;
+			}
+			return true;
+		}
+
+		function verzend(){
+			if(!validated("zin") || !validated("zoekterm") || !validated("vervangterm")) {
+				return;
+			}
+			
+			vervangWoord(
+				document.getElementById("zin").value,
+				document.getElementById("zoekterm").value,
+				document.getElementById("vervangterm").value
+				);
+		}
+
+		function vervangWoord(string,zoekstring,vervangstring) {
+			let gevonden = string.indexOf(zoekstring);
+
+			if(!(gevonden >= 0)) {
+				document.getElementById("resultaat").value = "Dit woord is niet gevonden!";
+				return;
+			}
+
+			document.getElementById("resultaat").value = string.replace(zoekstring, vervangstring);
+		}
+
+	</script>
+</head>
+<body>
+	
+	<p>
+		<label for="zin">Zin: </label>
+		<input type="text" id="zin" placeholder="Javascript rocks!">
+	</p>
+	<p>
+		<label for="zoekterm">Zoek dit woord: </label>
+		<input type="text" id="zoekterm" placeholder="rules">
+	</p>
+	<p>
+		<label for="vervangterm">Dit woord komt in de plaats: </label>
+		<input type="text" id="vervangterm" placeholder="rules">
+	</p>
+	<p>
+		<button onclick="verzend()">vervang</button>
+	</p>
+	<p>
+		<label for="resultaat">De nieuwe zin: </label>
+		<input type="text" id="resultaat" placeholder="rules">
+	</p>
+	
+</body>
+</html>

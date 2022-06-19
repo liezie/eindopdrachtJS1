@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+		let controle = ingave => ingave != null && ingave.length > 0 && !isNaN(ingave);
+		let writeHtmlParagraph = string => document.write('<p>' + string + '</p>');	
+		function berekenHoeveelheid() {
+			let vragen = [];
+			vragen.push('Wat is je geboortejaar?');
+			vragen.push('Hoe oud denk je te worden?');
+			vragen.push('Hoeveel kopjes koffie drink je dagelijks?');
+
+			let antwoorden = [];
+
+			for (var i = 0; i < vragen.length; i++) {
+				let antwoord = prompt(vragen[i]);
+				if(!controle(antwoord)) {
+					writeHtmlParagraph("Ingave was niet correct.  Zorg dat je voor elke vraag een getal ingeeft.");
+					break;
+				}
+				antwoorden.push(Number(antwoord));
+			}
+			if(antwoorden.length == 3) {
+				tonen(antwoorden);
+			}
+		}
+
+		function tonen(input) {
+			let datum = new Date();
+			let jaartal = datum.getFullYear();
+			let leeftijd = jaartal - input[0];
+			let ambitie = input[1];
+			let rest = ambitie - leeftijd;
+			if(rest <= 0) {
+				writeHtmlParagraph(`Je hebt aangegeven niet langer te willen leven dan je huidige leeftijd. Kijk je ingave na of bezoek een dokter.`);	
+				return;
+			}
+			let hvh = input[2];
+			let totaal = rest * 365 * hvh;
+			writeHtmlParagraph(`Je bent nu ${leeftijd}. Tegen ${hvh} kopjes per dag zal je ${totaal} kopjes gedronken hebben als je ${ambitie} jaar oud wordt.`);
+		}
+
+		berekenHoeveelheid();
+	</script>
+</head>
+<body>
+
+</body>
+</html>

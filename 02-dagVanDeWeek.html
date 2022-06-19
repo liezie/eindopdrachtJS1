@@ -1,0 +1,19 @@
+<html>
+	<script>
+		const dagBenamingen = ["zondag","maandag", "dinsdag","woensdag","donderdag","vrijdag","zaterdag"];
+		let datum = new Date();
+		let weekdag = datum.getDay();
+		let isWerkdag = dag => dag > 0 && dag < 6;
+		let writeHtmlParagraph = string => document.write('<p>' + string + '</p>');
+
+		writeHtmlParagraph(`Vandaag is het ${dagBenamingen[weekdag]}.`);
+		if(isWerkdag(weekdag)) {
+			writeHtmlParagraph('Het is een werkdag. Aan de slag dus.');
+		} else {
+			writeHtmlParagraph('Het is weekend, even bekomen.');
+		}
+	</script>
+<body>
+
+</body>
+</html>
